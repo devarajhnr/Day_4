@@ -41,6 +41,15 @@ jobs:
         with:
           name: build-artifacts
           path: build/
+  
+      - name: add timestamp
+        run: |
+          echo "TIMESTAMP=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_ENV
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results_${{ env.TIMESTAMP }}
+          path: test-results/
 
   download:
     runs-on: ubuntu-latest
